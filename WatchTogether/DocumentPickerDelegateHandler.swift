@@ -21,11 +21,20 @@ class DocumentPickerDelegateHandler: NSObject, UIDocumentPickerDelegate {
     }
 }
 
-struct DocumentPickerViewController: UIDocumentPickerViewController {
-    var delegate: UIDocumentPickerDelegate?
-    
-    override var documentPickerDelegate: UIDocumentPickerDelegate? {
-        get { return delegate }
-        set { delegate = newValue }
+// Helper extension to simplify document picker creation
+extension UIDocumentPickerViewController {
+    static func createPicker(forContentTypes contentTypes: [UTType],
+                            completion: @escaping ([URL]) -> Void) -> UIDocumentPickerViewController {
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: contentTypes)
+        let delegate = DocumentPickerDelegateHandler(completion: completion)
+        // Store the delegate as an associated object to prevent it from being deallocated
+        picker.delegate = delegate
+        objc_setAssociatedObject(picker, &AssociatedObjectKey.delegateKey, delegate, .OBJC_ASSOCIATION_RETAIN)
+        return picker
     }
+}
+
+// Define a key for associated objects
+private enum AssociatedObjectKey {
+    static var delegateKey: UInt8 = 0
 }

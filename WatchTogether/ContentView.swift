@@ -99,9 +99,10 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-            // Request necessary permissions when the app launches
+            // In newer GroupActivities, we don't need to explicitly prepare for sharing
             Task {
-                try? await GroupStateObserver.prepareForSharing()
+                // Let the coordinator prepare for activity
+                coordinator.prepareForActivity()
             }
         }
         .alert(isPresented: Binding<Bool>(

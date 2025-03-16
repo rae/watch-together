@@ -19,6 +19,10 @@ struct VideoFileInfo: Codable {
     let duration: Double
 }
 
+struct TimeMessage: Codable {
+    let seconds: Double
+}
+
 @Observable
 class VideoCoordinator {
     var player: AVPlayer?
@@ -48,7 +52,7 @@ class VideoCoordinator {
         Task {
             for await session in VideoWatchingActivity.sessions() {
                 configureGroupSession(session)
-                await session.join()
+                session.join()
                 
                 await MainActor.run {
                     isJoined = true
@@ -71,8 +75,18 @@ class VideoCoordinator {
         Task {
             guard let messenger = messenger else { return }
             
-            for await (message, _) in messenger.messages(of: CMTime.self) {
-                handleReceivedTime(message)
+            // Need to use a custom message type for CMTime
+            for await (message, _) in messenger.messages(of: Data.self) {
+                do {
+                    let decoder = JSONDecoder()
+                    // Try to decode as TimeMessage
+                    if let timeMessage = try? decoder.decode(TimeMessage.self, from: message) {
+                        let time = CMTime(seconds: timeMessage.seconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+                        handleReceivedTime(time)
+                    }
+                } catch {
+                    // Ignore errors - it might be a file info message instead
+                }
             }
         }
     }
@@ -84,20 +98,20 @@ class VideoCoordinator {
             for await (message, _) in messenger.messages(of: Data.self) {
                 do {
                     let decoder = JSONDecoder()
-                    let receivedFileInfo = try decoder.decode(VideoFileInfo.self, from: message)
-                    
-                    await MainActor.run {
-                        self.remoteFileInfo = receivedFileInfo
-                        // Check if we already have a file selected
-                        if let localFileInfo = self.fileInfo {
-                            compareFileInfo(local: localFileInfo, remote: receivedFileInfo)
-                        } else {
-                            // Alert user to select corresponding file
-                            errorMessage = "Other participant is watching \(receivedFileInfo.filename). Please select this file to watch together."
+                    if let receivedFileInfo = try? decoder.decode(VideoFileInfo.self, from: message) {
+                        await MainActor.run {
+                            self.remoteFileInfo = receivedFileInfo
+                            // Check if we already have a file selected
+                            if let localFileInfo = self.fileInfo {
+                                compareFileInfo(local: localFileInfo, remote: receivedFileInfo)
+                            } else {
+                                // Alert user to select corresponding file
+                                errorMessage = "Other participant is watching \(receivedFileInfo.filename). Please select this file to watch together."
+                            }
                         }
                     }
                 } catch {
-                    print("Error decoding file info: \(error)")
+                    // Ignore errors - it might be a time message instead
                 }
             }
         }
@@ -149,7 +163,7 @@ class VideoCoordinator {
             let checksum = SHA256.hash(data: headerData).compactMap { String(format: "%02x", $0) }.joined()
             
             // Get video duration
-            let asset = AVAsset(url: url)
+            let asset = AVURLAsset(url: url)
             let duration = try await asset.load(.duration).seconds
             
             return VideoFileInfo(
@@ -166,29 +180,11 @@ class VideoCoordinator {
         }
     }
     
-    func startSharing() {
-        Task {
-            do {
-                let activity = VideoWatchingActivity()
-                let session = try await activity.prepareForActivation()
-                let groupSession = activity.activate(session)
-                
-                configureGroupSession(groupSession)
-                
-                await MainActor.run {
-                    isSharing = true
-                }
-            } catch {
-                await MainActor.run {
-                    errorMessage = "Failed to start sharing: \(error.localizedDescription)"
-                }
-            }
-        }
-    }
-    
     func selectVideo() {
-        let panel = DocumentPickerViewController(forOpeningContentTypes: [UTType.movie, UTType.video])
-        panel.delegate = DocumentPickerDelegateHandler { [weak self] urls in
+        // Create document picker with the helper extension
+        let picker = UIDocumentPickerViewController.createPicker(
+            forContentTypes: [UTType.movie, UTType.video]
+        ) { [weak self] urls in
             guard let url = urls.first else { return }
             
             Task { @MainActor [weak self] in
@@ -223,13 +219,13 @@ class VideoCoordinator {
         // Present the document picker
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let root = windowScene.windows.first?.rootViewController {
-            root.present(panel, animated: true)
+            root.present(picker, animated: true)
         }
     }
     
     private func setupPlayer(with url: URL) {
         selectedVideoURL = url
-        let asset = AVAsset(url: url)
+        let asset = AVURLAsset(url: url)
         let playerItem = AVPlayerItem(asset: asset)
         
         if player == nil {
@@ -258,8 +254,43 @@ class VideoCoordinator {
                 // Only send time updates if playing
                 if player.rate > 0 {
                     Task {
-                        try? await self.messenger?.send(time)
+                        do {
+                            // Convert CMTime to Data using our TimeMessage struct
+                            let timeMessage = TimeMessage(seconds: CMTimeGetSeconds(time))
+                            let encoder = JSONEncoder()
+                            let timeData = try encoder.encode(timeMessage)
+                            try await self.messenger?.send(timeData)
+                        } catch {
+                            print("Error sending time update: \(error)")
+                        }
                     }
+                }
+            }
+        }
+    }
+    
+    func startSharing() {
+        Task {
+            do {
+                let activity = VideoWatchingActivity()
+                // Prepare for activation and discard the result since we don't need it
+                _ = try await activity.prepareForActivation()
+                
+                // Activate the activity
+                try await activity.activate()
+                
+                // Watch for the session
+                for await groupSession in VideoWatchingActivity.sessions() {
+                    configureGroupSession(groupSession)
+                    
+                    await MainActor.run {
+                        isSharing = true
+                    }
+                    break // Just need the first session
+                }
+            } catch {
+                await MainActor.run {
+                    errorMessage = "Failed to start sharing: \(error.localizedDescription)"
                 }
             }
         }

@@ -9,6 +9,10 @@ import SwiftUI
 import RealityKit
 import AVKit
 
+import SwiftUI
+import RealityKit
+import AVKit
+
 struct VideoEnvironmentView: View {
     @Environment(\.videoCoordinator) private var coordinator
     @State private var environmentType: EnvironmentType = .theater
@@ -27,11 +31,26 @@ struct VideoEnvironmentView: View {
             
             // Video player positioned in environment
             if let player = coordinator.player {
-                // Position the video appropriately based on environment
-                VideoPlayerView(player: player)
-                    .frame(width: 16, height: 9)  // 16:9 aspect ratio
-                    .scale3D(environmentType == .theater ? 2 : 1.5)
-                    .position(x: 0, y: 1.7, z: -5)
+                RealityView { content in
+                    // Create a video material from the AVPlayer
+                    let videoMaterial = VideoMaterial(avPlayer: player)
+                    
+                    // Create a plane with the video material
+                    let videoPlane = ModelEntity(
+                        mesh: .generatePlane(width: 16, height: 9, cornerRadius: 0.2),
+                        materials: [videoMaterial]
+                    )
+                    
+                    // Scale based on environment type
+                    let scale: Float = environmentType == .theater ? 2.0 : 1.5
+                    videoPlane.scale = simd_float3(repeating: scale)
+                    
+                    // Position the video plane in the environment
+                    videoPlane.position = simd_float3(0, 1.7, -5)
+                    
+                    // Add the video plane to the scene
+                    content.add(videoPlane)
+                }
             }
             
             // Environment controls

@@ -20,18 +20,29 @@ enum EnvironmentType: String, CaseIterable, Identifiable {
 struct TheaterEnvironment: View {
     var body: some View {
         RealityView { content in
-            // Theater environment would be created here
-            // This would include theater seating, walls, etc.
-            let theater = try! ModelEntity.load(named: "TheaterEnvironment")
-            content.add(theater)
-            
-            // Add ambient lighting
-            let light = PointLight()
-            light.intensity = 500
-            light.position = SIMD3(0, 5, 5)
+            // Create a simple theater environment with basic lighting
+            // Create a point light
             let lightEntity = ModelEntity()
-            lightEntity.components.set(light)
+            let pointLight = PointLightComponent(color: .white, intensity: 500)
+            lightEntity.components.set(pointLight)
+            lightEntity.position = simd_float3(0, 2, 0)
             content.add(lightEntity)
+            
+            // Add a simple floor to represent theater floor
+            let floorEntity = ModelEntity(
+                mesh: .generatePlane(width: 10, depth: 10),
+                materials: [SimpleMaterial(color: .darkGray, isMetallic: false)]
+            )
+            floorEntity.position = simd_float3(0, -1.5, 0)
+            content.add(floorEntity)
+            
+            // Add a wall to represent theater screen
+            let screenEntity = ModelEntity(
+                mesh: .generatePlane(width: 8, height: 4.5),
+                materials: [SimpleMaterial(color: .white, isMetallic: false)]
+            )
+            screenEntity.position = simd_float3(0, 1, -5)
+            content.add(screenEntity)
         }
     }
 }
@@ -40,18 +51,33 @@ struct TheaterEnvironment: View {
 struct NatureEnvironment: View {
     var body: some View {
         RealityView { content in
-            // Nature environment would be created here
-            // This would include trees, sky, etc.
-            let nature = try! ModelEntity.load(named: "NatureEnvironment")
-            content.add(nature)
+            // Create a simple nature environment
+            // Create a directional light to simulate sun
+            let sunEntity = ModelEntity()
+            let sunLight = DirectionalLightComponent(color: .white, intensity: 1000)
+            sunEntity.components.set(sunLight)
+            // Position high and angled like the sun
+            sunEntity.position = simd_float3(5, 10, 5)
+            sunEntity.look(at: simd_float3(0, 0, 0), from: sunEntity.position, relativeTo: nil)
+            content.add(sunEntity)
             
-            // Add sunlight
-            let sunlight = DirectionalLight()
-            sunlight.intensity = 1000
-            sunlight.color = .white
-            let sunlightEntity = ModelEntity()
-            sunlightEntity.components.set(sunlight)
-            content.add(sunlightEntity)
+            // Add a green floor to represent grass
+            let groundEntity = ModelEntity(
+                mesh: .generatePlane(width: 20, depth: 20),
+                materials: [SimpleMaterial(color: .green, isMetallic: false)]
+            )
+            groundEntity.position = simd_float3(0, -1.5, 0)
+            content.add(groundEntity)
+            
+            // Add a blue ceiling to represent sky
+            let skyEntity = ModelEntity(
+                mesh: .generatePlane(width: 30, height: 30),
+                materials: [SimpleMaterial(color: .blue, isMetallic: false)]
+            )
+            skyEntity.position = simd_float3(0, 10, 0)
+            // Rotate to face downward
+            skyEntity.orientation = simd_quatf(angle: .pi, axis: simd_float3(1, 0, 0))
+            content.add(skyEntity)
         }
     }
 }
@@ -60,18 +86,36 @@ struct NatureEnvironment: View {
 struct SpaceEnvironment: View {
     var body: some View {
         RealityView { content in
-            // Space environment would be created here
-            // This would include stars, planets, etc.
-            let space = try! ModelEntity.load(named: "SpaceEnvironment")
-            content.add(space)
-            
-            // Add ambient light (dim for space)
-            let ambientLight = PointLight()
-            ambientLight.intensity = 200
-            ambientLight.color = .blue
+            // Create a simple space environment
+            // Create a dim point light
             let lightEntity = ModelEntity()
+            let ambientLight = PointLightComponent(color: .blue, intensity: 200)
             lightEntity.components.set(ambientLight)
+            lightEntity.position = simd_float3(0, 2, 2)
             content.add(lightEntity)
+            
+            // Add a black floor to represent space
+            let spaceEntity = ModelEntity(
+                mesh: .generatePlane(width: 20, depth: 20),
+                materials: [SimpleMaterial(color: .black, isMetallic: true)]
+            )
+            spaceEntity.position = simd_float3(0, -1.5, 0)
+            content.add(spaceEntity)
+            
+            // Add some stars (small white spheres)
+            for _ in 0..<50 {
+                let starSize = Float.random(in: 0.02...0.08)
+                let starEntity = ModelEntity(
+                    mesh: .generateSphere(radius: starSize),
+                    materials: [SimpleMaterial(color: .white, isMetallic: true)]
+                )
+                // Random positions around the environment
+                let x = Float.random(in: -10...10)
+                let y = Float.random(in: -1...8)
+                let z = Float.random(in: -10...10)
+                starEntity.position = simd_float3(x, y, z)
+                content.add(starEntity)
+            }
         }
     }
 }
