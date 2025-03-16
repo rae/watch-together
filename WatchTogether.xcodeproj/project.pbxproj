@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0111269D2D8660BC00E50214 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 0111269C2D8660BC00E50214 /* RealityKitContent */; };
+		016485552D86F519007BA3DA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016485542D86F519007BA3DA /* AVFoundation.framework */; };
+		016485572D86F523007BA3DA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016485562D86F523007BA3DA /* CoreAudio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		011126972D8660BC00E50214 /* WatchTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0111269B2D8660BC00E50214 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
+		016485542D86F519007BA3DA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		016485562D86F523007BA3DA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -41,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				016485572D86F523007BA3DA /* CoreAudio.framework in Frameworks */,
+				016485552D86F519007BA3DA /* AVFoundation.framework in Frameworks */,
 				0111269D2D8660BC00E50214 /* RealityKitContent in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,6 +59,7 @@
 			children = (
 				011126992D8660BC00E50214 /* WatchTogether */,
 				0111269A2D8660BC00E50214 /* Packages */,
+				016485532D86F519007BA3DA /* Frameworks */,
 				011126982D8660BC00E50214 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,6 +78,15 @@
 				0111269B2D8660BC00E50214 /* RealityKitContent */,
 			);
 			path = Packages;
+			sourceTree = "<group>";
+		};
+		016485532D86F519007BA3DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				016485562D86F523007BA3DA /* CoreAudio.framework */,
+				016485542D86F519007BA3DA /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
