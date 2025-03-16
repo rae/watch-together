@@ -2,14 +2,34 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationPreferredDefaultSceneSessionRole</key>
-		<string>UIWindowSceneSessionRoleApplication</string>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<true/>
-		<key>UISceneConfigurations</key>
-		<dict/>
-	</dict>
+    <!-- App Name and Bundle ID -->
+    <key>CFBundleDisplayName</key>
+    <string>Watch Together</string>
+    <key>CFBundleIdentifier</key>
+    <string>tnir.ca.WatchTogether</string>
+    
+    <!-- Bonjour Services for SharePlay -->
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_tnir.ca.WatchTogether.watchTogether._tcp</string>
+    </array>
+    
+    <!-- Privacy Descriptions -->
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>Watch Together requires local network access to synchronize video playback with other participants</string>
+    
+    <key>NSCameraUsageDescription</key>
+    <string>Required for mixed reality experiences</string>
+    
+    <!-- App URL Scheme for Sharing -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>watchtogether</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>
