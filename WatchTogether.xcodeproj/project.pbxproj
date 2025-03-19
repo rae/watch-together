@@ -181,6 +181,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Watch Together";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Required for mixed reality experiences";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Watch Together requires local network access to synchronize video playback with other participants";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -206,6 +209,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Watch Together";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Required for mixed reality experiences";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Watch Together requires local network access to synchronize video playback with other participants";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
