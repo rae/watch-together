@@ -13,29 +13,29 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		011126972D8660BC00E50214 /* WatchTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		011126972D8660BC00E50214 /* WatchItTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchItTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0111269B2D8660BC00E50214 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		016485542D86F519007BA3DA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		016485562D86F523007BA3DA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		011126AF2D8660BD00E50214 /* Exceptions for "WatchTogether" folder in "WatchTogether" target */ = {
+		011126AF2D8660BD00E50214 /* Exceptions for "WatchItTogether" folder in "WatchItTogether" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 011126962D8660BC00E50214 /* WatchTogether */;
+			target = 011126962D8660BC00E50214 /* WatchItTogether */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		011126992D8660BC00E50214 /* WatchTogether */ = {
+		011126992D8660BC00E50214 /* WatchItTogether */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				011126AF2D8660BD00E50214 /* Exceptions for "WatchTogether" folder in "WatchTogether" target */,
+				011126AF2D8660BD00E50214 /* Exceptions for "WatchItTogether" folder in "WatchItTogether" target */,
 			);
-			path = WatchTogether;
+			path = WatchItTogether;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -57,7 +57,7 @@
 		0111268E2D8660BC00E50214 = {
 			isa = PBXGroup;
 			children = (
-				011126992D8660BC00E50214 /* WatchTogether */,
+				011126992D8660BC00E50214 /* WatchItTogether */,
 				0111269A2D8660BC00E50214 /* Packages */,
 				016485532D86F519007BA3DA /* Frameworks */,
 				011126982D8660BC00E50214 /* Products */,
@@ -67,7 +67,7 @@
 		011126982D8660BC00E50214 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				011126972D8660BC00E50214 /* WatchTogether.app */,
+				011126972D8660BC00E50214 /* WatchItTogether.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,9 +92,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		011126962D8660BC00E50214 /* WatchTogether */ = {
+		011126962D8660BC00E50214 /* WatchItTogether */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 011126B02D8660BD00E50214 /* Build configuration list for PBXNativeTarget "WatchTogether" */;
+			buildConfigurationList = 011126B02D8660BD00E50214 /* Build configuration list for PBXNativeTarget "WatchItTogether" */;
 			buildPhases = (
 				011126932D8660BC00E50214 /* Sources */,
 				011126942D8660BC00E50214 /* Frameworks */,
@@ -105,14 +105,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				011126992D8660BC00E50214 /* WatchTogether */,
+				011126992D8660BC00E50214 /* WatchItTogether */,
 			);
-			name = WatchTogether;
+			name = WatchItTogether;
 			packageProductDependencies = (
 				0111269C2D8660BC00E50214 /* RealityKitContent */,
 			);
 			productName = WatchTogether;
-			productReference = 011126972D8660BC00E50214 /* WatchTogether.app */;
+			productReference = 011126972D8660BC00E50214 /* WatchItTogether.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -130,7 +130,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 011126922D8660BC00E50214 /* Build configuration list for PBXProject "WatchTogether" */;
+			buildConfigurationList = 011126922D8660BC00E50214 /* Build configuration list for PBXProject "WatchItTogether" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -144,7 +144,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				011126962D8660BC00E50214 /* WatchTogether */,
+				011126962D8660BC00E50214 /* WatchItTogether */,
 			);
 		};
 /* End PBXProject section */
@@ -181,9 +181,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Watch Together";
+				INFOPLIST_KEY_CFBundleDisplayName = "Watch It Together";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Required for mixed reality experiences";
-				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Watch Together requires local network access to synchronize video playback with other participants";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Watch It Together requires local network access to synchronize video playback with other participants";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -209,9 +209,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Watch Together";
+				INFOPLIST_KEY_CFBundleDisplayName = "Watch It Together";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Required for mixed reality experiences";
-				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Watch Together requires local network access to synchronize video playback with other participants";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Watch It Together requires local network access to synchronize video playback with other participants";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -350,7 +350,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		011126922D8660BC00E50214 /* Build configuration list for PBXProject "WatchTogether" */ = {
+		011126922D8660BC00E50214 /* Build configuration list for PBXProject "WatchItTogether" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				011126B32D8660BD00E50214 /* Debug */,
@@ -359,7 +359,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		011126B02D8660BD00E50214 /* Build configuration list for PBXNativeTarget "WatchTogether" */ = {
+		011126B02D8660BD00E50214 /* Build configuration list for PBXNativeTarget "WatchItTogether" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				011126B12D8660BD00E50214 /* Debug */,

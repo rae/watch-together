@@ -1,6 +1,6 @@
 //
 //  VideoEnvironmentView.swift
-//  WatchTogether
+//  WatchItTogether
 //
 //  Created by Reid Ellis on 2025-03-15.
 //

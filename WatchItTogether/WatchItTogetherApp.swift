@@ -1,6 +1,6 @@
 //
-//  WatchTogetherApp.swift
-//  WatchTogether
+//  WatchItTogether.swift
+//  WatchItTogether
 //
 //  Created by Reid Ellis on 2025-03-15.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 
 @main
-struct WatchTogetherApp: App {
+struct WatchItTogetherApp: App {
     @State private var immersionStyle: ImmersionStyle = .full
     
     var body: some SwiftUI.Scene {
