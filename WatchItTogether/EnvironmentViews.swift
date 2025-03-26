@@ -16,6 +16,8 @@ enum EnvironmentType: String, CaseIterable, Identifiable {
     var id: String { self.rawValue }
 }
 
+let planeHeight: Float = -3.5
+
 // Theater environment view
 struct TheaterEnvironment: View {
     var body: some View {
@@ -33,7 +35,7 @@ struct TheaterEnvironment: View {
                 mesh: .generatePlane(width: 10, depth: 10),
                 materials: [SimpleMaterial(color: .darkGray, isMetallic: false)]
             )
-            floorEntity.position = simd_float3(0, -1.5, 0)
+            floorEntity.position = simd_float3(0, planeHeight, 0)
             content.add(floorEntity)
             
             // Add a wall to represent theater screen
@@ -66,7 +68,7 @@ struct NatureEnvironment: View {
                 mesh: .generatePlane(width: 20, depth: 20),
                 materials: [SimpleMaterial(color: .green, isMetallic: false)]
             )
-            groundEntity.position = simd_float3(0, -1.5, 0)
+            groundEntity.position = simd_float3(0, planeHeight, 0)
             content.add(groundEntity)
             
             // Add a blue ceiling to represent sky
@@ -99,7 +101,7 @@ struct SpaceEnvironment: View {
                 mesh: .generatePlane(width: 20, depth: 20),
                 materials: [SimpleMaterial(color: .black, isMetallic: true)]
             )
-            spaceEntity.position = simd_float3(0, -1.5, 0)
+            spaceEntity.position = simd_float3(0, planeHeight, 0)
             content.add(spaceEntity)
             
             // Add some stars (small white spheres)

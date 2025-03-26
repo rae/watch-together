@@ -10,7 +10,7 @@ import RealityKit
 
 @main
 struct WatchItTogetherApp: App {
-    @State private var immersionStyle: ImmersionStyle = .mixed
+    @State private var immersionStyle: ImmersionStyle = .full
     
     var body: some SwiftUI.Scene {
         // Primary window - required for proper scene setup
