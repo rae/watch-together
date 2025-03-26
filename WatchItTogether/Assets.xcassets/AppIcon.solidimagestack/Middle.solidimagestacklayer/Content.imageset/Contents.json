@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "couch.png",
       "idiom" : "vision",
       "scale" : "2x"
     }

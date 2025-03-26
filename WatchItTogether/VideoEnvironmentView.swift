@@ -15,7 +15,7 @@ import AVKit
 
 struct VideoEnvironmentView: View {
     @Environment(\.videoCoordinator) private var coordinator
-    @State private var environmentType: EnvironmentType = .theater
+    @State private var environmentType: EnvironmentType = .space
     
     var body: some View {
         ZStack {
@@ -66,7 +66,7 @@ struct VideoEnvironmentView: View {
                         .padding(.horizontal)
                     }
                 }
-                .padding(.bottom, 40)
+                .padding(.top, 40)
                 .padding(.horizontal)
             }
         }

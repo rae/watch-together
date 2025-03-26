@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "stars-opaque-1024px.png",
       "idiom" : "vision",
       "scale" : "2x"
     }

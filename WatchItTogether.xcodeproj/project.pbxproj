@@ -182,8 +182,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Watch It Together";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Required for mixed reality experiences";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Watch It Together requires local network access to synchronize video playback with other participants";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "wifi microphone metal arkit arm64";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -195,6 +197,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 7;
+				XROS_DEPLOYMENT_TARGET = 2.3;
 			};
 			name = Debug;
 		};
@@ -210,8 +213,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Watch It Together";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Required for mixed reality experiences";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Watch It Together requires local network access to synchronize video playback with other participants";
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "wifi microphone metal arkit arm64";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -223,6 +228,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 7;
+				XROS_DEPLOYMENT_TARGET = 2.3;
 			};
 			name = Release;
 		};
