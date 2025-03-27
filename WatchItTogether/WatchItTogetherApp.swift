@@ -23,6 +23,5 @@ struct WatchItTogetherApp: App {
         ImmersiveSpace(id: "VideoEnvironment") {
             VideoEnvironmentView()
         }
-        .immersionStyle(selection: $immersionStyle, in: .full, .mixed)
     }
 }
